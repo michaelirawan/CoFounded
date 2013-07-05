@@ -16,6 +16,7 @@ class Dashboard extends CI_Controller {
         $data['potential'] = $this->profile->get_potential_matches();
         $data['connect'] = $this->profile->get_your_connection();
         
+        
 
         $is_logged_in = $this->session->userdata('is_logged_in');
         if (!isset($is_logged_in) || $is_logged_in != true) {
