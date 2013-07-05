@@ -95,14 +95,15 @@
                                         <div class="row">
                                             <div class="span9 editable_content">
                                                 <div class="content">
-                                                    <h5>RDC Telkom &nbsp;&nbsp;<a style="display: none;"data-target="#work" data-toggle="modal" href="#" class="content-edit icon-pencil icon-white"></a></h5>
-                                                    <p>web developer (August 2012 - Present)</p>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillu</p>
-                                                </div>
-                                                <div class="content">
-                                                    <h5>RDC Telkom &nbsp;&nbsp;<a style="display: none;"data-target="#work" data-toggle="modal" href="#" class="content-edit icon-pencil icon-white"></a></h5>
-                                                    <p>web developer (August 2012 - Present)</p>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillu</p>
+                                                    <?php
+                                                    foreach ($work_exp->result() as $row) {
+                                                        ?>
+                                                        <h5> <?php echo $row->employer; ?> </h5>
+                                                        <p><?php echo $row->jobtitle; ?> (<?php echo $row->periodfrom; ?> - <?php echo $row->periodto; ?> )</p>
+                                                        <p style="text-align: justify"> <?php echo $row->jobdesc; ?> </p>
+                                                        <?php
+                                                    }
+                                                    ?> 
                                                 </div>
                                             </div>
                                         </div><!-- row -->
@@ -114,32 +115,44 @@
                                                 <h3 id="myModalLabel">Work Experiences</h3>
                                             </div>
                                             <div class="modal-body">
-                                                <form class="form-vertical">
+                                                <form class="form-vertical" method="post" action="<?php echo base_url('index.php/introduction/update_work_exp'); ?>">
                                                     <div class="control-group">
                                                         <div class="controls">
-                                                            <input type="text" id="company" placeholder="Company name">
+                                                            <input type="text" id="company" name="company" placeholder="Company name">
                                                         </div>
                                                         <div class="controls">
-                                                            <input type="text" id="position" placeholder="Position">
+                                                            <input type="text" id="position" name="position" placeholder="Position">
                                                         </div>
                                                     </div>
                                                     <div class="control-group">
                                                         <div class="controls">
-                                                            <input type="text" id="date_from" placeholder="From" class="datepicker">
-                                                            <input type="text" id="date_to" placeholder="To" class="datepicker">
+                                                            <script type="text/javascript">
+                                                                $(function() {
+                                                                    $('#date_from4').datepicker();
+                                                                });
+                                                            </script>
+                                                            <input type="text" id="date_from4" placeholder="From" class="datepicker" name="work_from_date"/>
+
+                                                            <script type="text/javascript">
+                                                                $(function() {
+                                                                    $('#date_from5').datepicker();
+                                                                });
+                                                            </script>
+                                                            <input type="text" id="date_from5" placeholder="To" class="datepicker" name="work_date_to"/>
                                                         </div>
                                                     </div>
                                                     <div class="control-group">
                                                         <div class="controls">
-                                                            <textarea rows="3" placeholder="Description"></textarea>
+                                                            <textarea rows="3" placeholder="Description" name="desc_work"></textarea>
                                                         </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <button class="btn btn-primary">Save</button>
+                                                        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
                                                     </div>
                                                 </form>
                                             </div>
-                                            <div class="modal-footer">
-                                                <button class="btn btn-primary">Save</button>
-                                                <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-                                            </div>
+
                                         </div>
                                         <a data-target="#work" data-toggle="modal" class="btn btn-primary btn-full"><i class="icon-plus icon-white"></i> Add New Job</a>
                                     </div><!-- modal -->

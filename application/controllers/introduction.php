@@ -14,6 +14,8 @@ class Introduction extends CI_Controller {
             $data['main_content'] = 'introduction';
             $data['item'] = $this->session->userdata('email');
 
+
+            $data['work_exp'] = $this->profile->get_work_exp();
             $data['skill'] = $this->profile->get_work_skill();
             $data['edu'] = $this->profile->get_edu_exp();
             $data['media_youtube'] = $this->profile->get_media_youtube();
@@ -59,7 +61,6 @@ class Introduction extends CI_Controller {
         return $q;
     }
 
-
     function get_image() {
         $this->load->model('Gallery_model');
         if ($this->input->post('upload')) {
@@ -90,6 +91,15 @@ class Introduction extends CI_Controller {
     function update_edu() {
         $this->load->model('membership_model');
         if ($query = $this->membership_model->update_edu()) {
+            redirect('/introduction');
+        } else {
+            
+        }
+    }
+
+    function update_work_exp() {
+        $this->load->model('membership_model');
+        if ($query = $this->membership_model->update_work_exp()) {
             redirect('/introduction');
         } else {
             

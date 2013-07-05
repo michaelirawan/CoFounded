@@ -95,6 +95,25 @@ class Membership_model extends CI_Model {
         return $insert;
     }
 
+    function update_work_exp() {
+        $this->db->select('member_id');
+        $this->db->from('member_tbl');
+        $this->db->where('email', $this->session->userdata('email'));
+        $query = $this->db->get();
+        $row = $query->row();
+
+        $new_skill = array(
+            'employer' => $this->input->post('company'),
+            'jobtitle' => $this->input->post('position'),
+            'periodfrom' => $this->input->post('work_from_date'),
+            'periodto' => $this->input->post('work_date_to'),
+            'jobdesc' => $this->input->post('desc_work'),
+            'member_tbl_member_id' => $row->member_id
+        );
+        $insert = $this->db->insert('we_tbl', $new_skill);
+        return $insert;
+    }
+
     function insert_new_media_youtube() {
         $this->db->select('member_id');
         $this->db->from('member_tbl');

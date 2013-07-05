@@ -37,7 +37,7 @@ class Profile extends CI_Controller {
         $q = $query->row();
         return $q->title;
     }
-    
+
     function get_quotes() {
         $this->db->select('memberquotes');
         $this->db->from('member_tbl');
@@ -46,7 +46,7 @@ class Profile extends CI_Controller {
         $q = $query->row();
         return $q->memberquotes;
     }
-    
+
     function get_industry() {
         $this->db->select('industry');
         $this->db->from('member_tbl');
@@ -55,7 +55,7 @@ class Profile extends CI_Controller {
         $q = $query->row();
         return $q->industry;
     }
-    
+
     function get_city() {
         $this->db->select('city');
         $this->db->from('member_tbl');
@@ -64,7 +64,7 @@ class Profile extends CI_Controller {
         $q = $query->row();
         return $q->city;
     }
-    
+
     function get_state() {
         $this->db->select('state');
         $this->db->from('member_tbl');
@@ -73,7 +73,7 @@ class Profile extends CI_Controller {
         $q = $query->row();
         return $q->state;
     }
-    
+
     function get_country() {
         $this->db->select('country');
         $this->db->from('member_tbl');
@@ -110,7 +110,6 @@ class Profile extends CI_Controller {
         return $q->bizidea;
     }
 
-
     function get_work_skill() {
         $this->db->select('a.skillexperttext, a.skillexpertname');
         $this->db->from('skillexpert_tbl as a');
@@ -120,8 +119,8 @@ class Profile extends CI_Controller {
         $q = $query;
         return $q;
     }
-    
-    function get_edu_exp(){
+
+    function get_edu_exp() {
         $this->db->select('a.school, a.degree, a.studyarea, a.activities, a.attdate');
         $this->db->from('edu_tbl as a');
         $this->db->join('member_tbl as b', 'a.member_tbl_member_id = b.member_id');
@@ -130,8 +129,18 @@ class Profile extends CI_Controller {
         $q = $query;
         return $q;
     }
-    
-    function get_media_youtube(){
+
+    function get_work_exp() {
+        $this->db->select('a.employer, a.jobtitle, a.periodfrom, a.periodto, a.jobdesc');
+        $this->db->from('we_tbl as a');
+        $this->db->join('member_tbl as b', 'a.member_tbl_member_id = b.member_id');
+        $this->db->where('b.email', $this->session->userdata('email'));
+        $query = $this->db->get();
+        $q = $query;
+        return $q;
+    }
+
+    function get_media_youtube() {
         $this->db->select('a.url');
         $this->db->from('media_tbl as a');
         $this->db->join('member_tbl as b', 'a.member_tbl_member_id = b.member_id');
@@ -141,8 +150,8 @@ class Profile extends CI_Controller {
         $q = $query;
         return $q;
     }
-    
-    function get_media_slideshare(){
+
+    function get_media_slideshare() {
         $this->db->select('a.url');
         $this->db->from('media_tbl as a');
         $this->db->join('member_tbl as b', 'a.member_tbl_member_id = b.member_id');
@@ -152,12 +161,34 @@ class Profile extends CI_Controller {
         $q = $query;
         return $q;
     }
-    
-    function get_potential_matches(){
-        
-        $this->db->select('b.firstname, b.lastname, b.title, b.photo, a.profession, a.location, a.requirement');
+
+    function get_potential_matches() {
+        $this->db->select('member_id');
+        $this->db->from('member_tbl');
+        $this->db->where('email', $this->session->userdata('email'));
+        $query = $this->db->get();
+        $row = $query->row();
+
+        $this->db->select('b.member_id,b.firstname, b.lastname, b.title, b.photo, a.profession, a.location, a.requirement');
         $this->db->from('potential_matches as a');
         $this->db->join('member_tbl as b', 'a.member_tbl_to_potential = b.member_id');
+        $this->db->where('a.member_tbl_potential_tbl', $row->member_id);
+        $query = $this->db->get();
+        $q = $query;
+        return $q;
+    }
+
+    function get_your_connection() {
+        $this->db->select('member_id');
+        $this->db->from('member_tbl');
+        $this->db->where('email', $this->session->userdata('email'));
+        $query = $this->db->get();
+        $row = $query->row();
+
+        $this->db->select('b.member_id, b.firstname, b.lastname, b.title, b.photo');
+        $this->db->from('your_connection as a');
+        $this->db->join('member_tbl as b', 'a.member_tbl_to_connection = b.member_id');
+        $this->db->where('a.member_tbl_from_connection', $row->member_id);
         $query = $this->db->get();
         $q = $query;
         return $q;
