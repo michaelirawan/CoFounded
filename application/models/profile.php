@@ -193,6 +193,16 @@ class Profile extends CI_Controller {
         $q = $query;
         return $q;
     }
+    
+    function get_message_member(){
+
+        $this->db->select('b.member_id, b.firstname, b.lastname, b.photo, a.message, a.date_scape, a.time_scape');
+        $this->db->from('message_member as a');
+        $this->db->join('member_tbl as b', 'a.member_id_to_message_id = b.member_id');
+        $query = $this->db->get();
+        $q = $query;
+        return $q;
+    }
 
 }
 

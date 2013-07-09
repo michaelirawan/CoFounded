@@ -35,4 +35,8 @@ class Bs2_model extends CI_Model {
         return $query->result_array();
     }
 
+    public function get_work($idmember) {
+        $query = $this->db->get_where('we_tbl', array('member_tbl_member_id' => $idmember));
+        return $query->result_array();
+    }
 }

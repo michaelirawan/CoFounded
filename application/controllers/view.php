@@ -15,7 +15,8 @@ class View extends CI_Controller {
         $data['media'] = $this->bs2_model->get_media($memberid);
         $data['title'] = 'CoFounded';
         $data['item'] = $this->session->userdata('email');
-        
+           
+        $data['work_exp'] = $this->bs2_model->get_work($memberid);
         $data['edu'] = $this->bs2_model->get_edu($memberid);
         $data['skill'] = $this->bs2_model->get_skill($memberid);
 

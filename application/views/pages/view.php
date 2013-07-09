@@ -1,9 +1,10 @@
 <div style="margin-bottom: 20px;margin-top: 30px">
 </div>
+
 <div class="container">
     <div class="row">
         <div class="span8">
-            <div class="well-route">
+            <div class="well-route" style="height: 575px">
                 <div class="itemin">
                     <div class="profile_tag">
                         <img src="<?php echo base_url($member['photo']) ?>" style="width:120px; height:150px;">
@@ -50,8 +51,8 @@
                 <div id="pages-share" class="boxin">
                     <div id="page_shares" style="height: 800px;">
                         <?php foreach ($media as $media_item): ?>
-                            <div class="itemin img-padding">
-                                <a href="#">
+                            <div class="itemin img-padding" >
+                                <a href="#" style="width: 77px; height: 259px;">
                                     <?php echo $media_item['url'] ?>
                                 </a>
                             </div>
@@ -70,20 +71,22 @@
                         <div class="accordion-group">
                             <div class="accordion-heading">
                                 <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
-                                    <i class="icon-chevron-down icon-white icon_collapse" style="margin-top: 7px"></i> Work Experiences
+                                    <i class="icon-chevron-right icon-white icon_collapse" style="margin-top: 7px"></i> Work Experiences
                                 </a>
                             </div>
                             <div id="collapseOne" class="accordion-body collapse in">
                                 <div class="accordion-inner">
                                     <div class="editable_content">
                                         <div class="content">
-                                            <p><b>RDC Telkom</b> - Web Developer (2012-now)</p>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillu</p>
+                                            <?php foreach ($work_exp as $media_item): ?>                                               
+
+                                                <p> <b><?php echo $media_item['employer'] ?> </b> - <?php echo $media_item['jobtitle'] ?> (<?php echo $media_item['periodfrom'] ?> - <?php echo $media_item['periodto'] ?>) </p>
+
+                                                <p><?php echo $media_item['jobdesc'] ?></p>
+
+                                            <?php endforeach ?>
                                         </div>
-                                        <div class="content">
-                                            <p><b>RDC Telkom</b> - Web Developer (2012-now)</p>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillu</p>
-                                        </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -210,6 +213,7 @@
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script src=<?php echo base_url('js/jquery.js') ?>></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>js/style2.js"></script>
 <script src=<?php echo base_url('js/bootstrap.min.js') ?>></script>
 <script src=<?php echo base_url('js/jquery-ui-1.9.2.custom.min.js') ?>></script>
 <script type="text/javascript" src=<?php echo base_url('js/jquery.mousewheel.js') ?>></script>

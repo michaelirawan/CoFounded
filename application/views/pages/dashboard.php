@@ -198,84 +198,26 @@
         <div class="chatbox">
             <div class="chatbox_scroll">
                 <div class="chat">
-                    <div class="image-chat">
-                        <img src=<?php echo base_url("img/person.jpg") ?>/>
-                    </div>
-                    <div class="info-chat">
-                        <div class="name-chat sender">
-                            Adam Smith
+                    <?php
+                    foreach ($message->result() as $row) {
+                        ?>
+                        <div class="image-chat">
+                            <img src="<?php echo base_url($row->photo) ?>"/>
                         </div>
-                        <div class="time-chat">
-                            20 january - 15.00
+                        <div class="info-chat">
+                            <div class="name-chat sender">
+                                <?php echo $row->firstname ?> <?php echo $row->lastname ?>
+                            </div>
+                            <div class="time-chat">
+                                <?php echo $row->date_scape ?> -  <?php echo $row->time_scape ?>
+                            </div>
+                            <div class="desc-chat">
+                                <?php echo $row->message ?>
+                            </div>
                         </div>
-                        <div class="desc-chat">
-                            tes 123
-                        </div>
-                    </div>
-                </div><!-- chat -->
-                <div class="chat">
-                    <div class="image-chat">
-                        <img src=<?php echo base_url("img/person.jpg") ?>/>
-                    </div>
-                    <div class="info-chat">
-                        <div class="name-chat user">
-                            Adam Smith
-                        </div>
-                        <div class="time-chat">
-                            20 january - 15.00
-                        </div>
-                        <div class="desc-chat">
-                            tes 123
-                        </div>
-                    </div>
-                </div><!-- chat -->
-                <div class="chat">
-                    <div class="image-chat">
-                        <img src=<?php echo base_url("img/person.jpg") ?>/>
-                    </div>
-                    <div class="info-chat">
-                        <div class="name-chat user">
-                            Adam Smith
-                        </div>
-                        <div class="time-chat">
-                            20 january - 15.00
-                        </div>
-                        <div class="desc-chat">
-                            tes 123
-                        </div>
-                    </div>
-                </div><!-- chat -->
-                <div class="chat">
-                    <div class="image-chat">
-                        <img src=<?php echo base_url("img/person.jpg") ?>/>
-                    </div>
-                    <div class="info-chat">
-                        <div class="name-chat sender">
-                            Adam Smith
-                        </div>
-                        <div class="time-chat">
-                            20 january - 15.00
-                        </div>
-                        <div class="desc-chat">
-                            tes 123
-                        </div>
-                    </div>
-                </div><!-- chat -->
-                <div class="chat">
-                    <div class="image-chat">
-                        <img src="person.jpg" />
-                    </div>
-                    <div class="info-chat">
-                        <div class="name-chat user">
-                            Adam Smith
-                        </div>
-                        <div class="time-chat">
-                            20 january - 15.00
-                        </div>
-                        <div class="desc-chat">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-                        </div>
-                    </div>
+                        <?php
+                    }
+                    ?>
                 </div><!-- chat -->
             </div>
             <div class="chatbox-input">
