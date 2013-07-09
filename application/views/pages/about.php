@@ -150,12 +150,6 @@
                     </div>
                 </div>
                 <div class="control-group">
-                    <label class="control-label" for="inputPassword"><i style="color: red;" title="required">*</i>  Location</label>
-                    <div class="controls">
-                        <input type="text" id="inputLocation" placeholder="Location" name="location">
-                    </div>
-                </div>
-                <div class="control-group">
                     <div class="controls">
                         <button type="submit" class="btn btn-primary">Sign up</button>
                     </div>

@@ -203,6 +203,16 @@ class Profile extends CI_Controller {
         $q = $query;
         return $q;
     }
+    
+    function get_browser_industry($where_industry){
+        $this->db->select('*');
+        $this->db->from('member_tbl');
+        $this->db->where('industry',$where_industry);
+        $query = $this->db->get()->result_array();
+        
+        $q = json_encode($query);
+        return $q;
+    }
 
 }
 

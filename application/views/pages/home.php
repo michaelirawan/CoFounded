@@ -57,9 +57,8 @@
                                         <li>Integration with other social media sites</li>
                                     </ul>
                                     <form>
-                                        <btn class="btn btn-info"> Learn more >></btn>
+                                        <btn id="learnmore"> Learn more >></btn>
                                     </form>
-
                                     </p>
                                 </div>
                             </div>

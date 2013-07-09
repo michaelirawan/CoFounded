@@ -40,6 +40,15 @@ class Browse extends CI_Controller {
         }
     }
 
+    function get_where_browser() {
+        $where_industry = $this->input->post('browser');
+        $this->load->model('profile');
+        $q = $this->profile->get_browser_industry($where_industry);
+        echo $q;
+    }
+    
+    
+
 }
 
 ?>
