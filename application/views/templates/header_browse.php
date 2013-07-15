@@ -56,17 +56,17 @@
                             </li>
                             <li>
                                 <a href= "<?php echo site_url("browse") ?>"> 
-                                    <i class="icon-home icon-white">
+                                   
                                     </i>&nbsp;Browse
                                 </a>
                             </li>
                             <li><a href= "<?php echo site_url("about") ?>"> 
-                                    <i class="icon-home icon-white">
+                                    
                                     </i>&nbsp;About
                                 </a>
                             </li>
                         </ul>
-                        <form class="navbar-search pull-left">
-                            <input id="aaa" type="text" class="search-query" placeholder="Search" style="width: 100px;">
+                        <form class="navbar-search pull-left" method="post" action="<?php echo site_url(); ?>/search">
+                            <input id="inputsearch" type="text" class="search-query" placeholder="Search" style="width: 100px;">
                             <div class="icon-search"></div>
                         </form>

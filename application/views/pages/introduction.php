@@ -5,7 +5,8 @@
 <script src=<?php echo base_url('js/deprecated.js') ?>></script>
 <script src=<?php echo base_url('js/jquery.jcarousel.min.js') ?>></script>
 <script src=<?php echo base_url('js/ckeditor.js') ?>></script>
-<script src=<?php echo base_url('js/style.js') ?>></script>    
+<script src=<?php echo base_url('js/style.js') ?>></script>   
+
 
 <div style="margin-bottom: 20px;margin-top: 30px">
 </div>
@@ -36,10 +37,17 @@
                                     <div class="span2">
                                         <img src=<?php echo base_url($img_url); ?>>
                                         <p>
+                                        <form action="<?php echo base_url(); ?>index.php/introduction/upload_img" id="frm-upload" method="post" accept-charset="utf-8" enctype="multipart/form-data">
                                             <a href="#" id="change_picture" value="upload">Change picture</a>
+                                            <input type="hidden" name="id_member_img" value="<?php echo $member_id_img ?>" />
                                             <input type="file" name="picture" id="change_picture_form" style="display: none" />
+                                            <input type="submit" name="upload" id="submit-upload" style="display: none;" />
+                                        </form>
+                                        <form action="<?php echo base_url(); ?>index.php/introduction/delete_img" id="del-upload" method="post">
+                                            <input type="hidden" name="id_member_img" value="<?php echo $member_id_img ?>" />
+                                            <a href="#" id="del_pic">Remove Picture</a>
+                                        </form>
 
-                                            <a href="#">Remove Picture</a>
                                         </p>
                                     </div>
                                 </div><!-- row -->

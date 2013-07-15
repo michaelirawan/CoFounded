@@ -2,6 +2,15 @@
 
 class Profile extends CI_Controller {
 
+    function get_id() {
+        $this->db->select('member_id');
+        $this->db->from('member_tbl');
+        $this->db->where('email', $this->session->userdata('email'));
+        $query = $this->db->get();
+        $q = $query->row();
+        return $q->member_id;
+    }
+
     function get_img() {
         $this->db->select('photo');
         $this->db->from('member_tbl');
@@ -209,7 +218,7 @@ class Profile extends CI_Controller {
         $this->db->select('*');
         $this->db->from('member_tbl');
         $this->db->where('industry', $where_industry);
-        
+
         $query = $this->db->get()->result_array();
 
         $q = json_encode($query);
@@ -217,21 +226,59 @@ class Profile extends CI_Controller {
     }
 
     function get_search() {
-        $search_query =  $this->input->post('inputsearch');
-        
+        $search_query = $this->input->post('inputsearch');
+
         $this->db->select('*');
         $this->db->from('member_tbl');
-        $this->db->where('firstname', $search_query);
-        $this->db->or_where('lastname', $search_query);
-        $this->db->or_where('title', $search_query);
-        $this->db->or_where('industry', $search_query);
-        $this->db->or_where('city', $search_query);
-        $this->db->or_where('state', $search_query);
-        $this->db->or_where('country', $search_query);
+        $this->db->like(mb_strtolower('firstname'), mb_strtolower($search_query));
+//        $this->db->or_where('lastname', $search_query);
+//        $this->db->or_where('title', $search_query); 
+//        $this->db->or_where('industry', $search_query);
+//        $this->db->or_where('city', $search_query);
+//        $this->db->or_where('state', $search_query);
+//        $this->db->or_where('country', $search_query);
         $query = $this->db->get();
         $q = $query;
         return $q;
     }
 
+    function upload_img() {
+        $this->load->library('upload');
+
+        $config = array(
+            'allowed_types' => 'jpg',
+            'upload_path' => realpath(APPPATH . '../img'),
+            'max_size' => 2000,
+            'overwrite' => TRUE,
+            'file_name' => 'img_new' . $this->input->post('id_member_img')
+        );
+
+        $this->upload->initialize($config);
+        if (!$this->upload->do_upload('picture')) { // array of input names (type file)
+            $error = array('error' => $this->upload->display_errors());
+        } else {
+            $data = array('upload_data' => $this->upload->data('picture')); // array
+        }
+
+        $update_img = 'img/img_new' . $this->input->post('id_member_img').'.jpg';
+
+        $data = array(
+            'photo' => $update_img
+        );
+        $this->db->where('member_id', $this->input->post('id_member_img'));
+        $this->db->update('member_tbl',$data);
+        return true;
+    }
+    
+    function del_img(){
+        $data = array(
+            'photo' => 'img/profile_blank.jpg'
+        );
+        $this->db->where('member_id', $this->input->post('id_member_img'));
+        $this->db->update('member_tbl',$data);
+        return true;
+    }
+
 }
+
 ?>

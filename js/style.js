@@ -55,5 +55,17 @@ $(document).ready(function() {
 
 
     });
+
+    $('#change_picture').click(function() {
+        $('#change_picture_form').click();
+    });
+
+    $('#change_picture_form').change(function() {
+        $('#frm-upload').submit();
+    });
+
+    $('#del_pic').click(function() {
+        $('#del-upload').submit();
+    });
 });
 

@@ -14,7 +14,7 @@ class Introduction extends CI_Controller {
             $data['main_content'] = 'introduction';
             $data['item'] = $this->session->userdata('email');
 
-
+            $data['member_id_img'] = $this->profile->get_id();
             $data['work_exp'] = $this->profile->get_work_exp();
             $data['skill'] = $this->profile->get_work_skill();
             $data['edu'] = $this->profile->get_edu_exp();
@@ -121,6 +121,24 @@ class Introduction extends CI_Controller {
             redirect('/introduction');
         } else {
             
+        }
+    }
+    
+    function upload_img(){
+        $this->load->model('profile');
+        $q = $this->profile->upload_img();
+        
+        if($q){
+            redirect("/introduction");
+        }
+    }
+    
+    function delete_img(){
+        $this->load->model('profile');
+        $q = $this->profile->del_img();
+        
+        if($q){
+            redirect("/introduction");
         }
     }
 

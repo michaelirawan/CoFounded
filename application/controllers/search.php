@@ -10,11 +10,11 @@ class Search extends CI_Controller {
     }
 
     public function index() {
-        $data['member'] = $this->bs2_model->get_search();
+        //$data['member'] = $this->bs2_model->get_search();
         $data['title'] = 'CoFounded';
         $data['main_content'] = 'Search';
         $data['item'] = $this->session->userdata('email');
-        //$data['member'] = $this->profile->get_search();
+        $data['member'] = $this->profile->get_search();
         
 
         $is_logged_in = $this->session->userdata('is_logged_in');

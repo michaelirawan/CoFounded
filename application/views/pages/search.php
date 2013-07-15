@@ -5,27 +5,27 @@
             <div class="well-route">
                 <div class="itemin">
                     <div class="row">                
-                        <?php foreach ($member as $member_item): ?>
+                        <?php foreach ($member->result() as $member_item): ?>
                             <div class="span4 profile_box">
                                 <div class="item-in-home">
                                     <div class="image">
-                                        <img src=<?php echo base_url($member_item['photo']) ?> />
+                                        <img src=<?php echo base_url($member_item->photo) ?> />
                                     </div>
                                     <div class="profile-left">
                                         <p class="profile_header">
-                                            <?php echo $member_item['firstname'] . " " . $member_item['lastname'] ?>
+                                            <?php echo $member_item->firstname . " " . $member_item->lastname ?>
                                         </p>
-                                        <p><?php echo $member_item['title'] . ", "; ?> <br><?php echo $member_item['industry']; ?><br>
-                                            <?php echo $member_item['city'] . ", " . $member_item['state'] . ", " . $member_item['country']; ?></p>
+                                        <p><?php echo $member_item->title. ", "; ?> <br><?php echo $member_item->industry; ?><br>
+                                            <?php echo $member_item->city . ", " . $member_item->state . ", " . $member_item->country; ?></p>
                                     </div>
                                     <div class="looking-for">
-                                        <p>Looking For: <?php echo $member_item['partnerreq']; ?></p>
+                                        <p>Looking For: <?php echo $member_item->partnerreq; ?></p>
                                     </div>
                                     <hr>
                                     <div class="about-me">
                                         <p>
                                             About Me: <br>
-                                            <?php echo substr($member_item['aboutme'], 0, 140); ?>... <a href=<?php echo site_url("view/index/id/" . $member_item['member_id']) ?>>More</a>
+                                            <?php echo substr($member_item->aboutme, 0, 140); ?>... <a href=<?php echo site_url("view/index/id/" . $member_item->member_id) ?>>More</a>
                                         </p>
                                     </div>
                                 </div>
