@@ -13,12 +13,12 @@
         <link href= "<?php echo base_url('css/jquery.jscrollpane.css'); ?>" rel="stylesheet" type="text/css" media="all"/>
         <link href= "<?php echo base_url('css/style.css') ?> " rel="stylesheet" type="text/css"/>
         <link href= "<?php echo base_url('img/logo/favicon.ico') ?>" rel="icon" icon type="image/vnd.microsoft.icon" />
-<!--        <link href='http://fonts.googleapis.com/css?family=Oxygen:700' rel='stylesheet' type='text/css'/>
+        <link href='http://fonts.googleapis.com/css?family=Oxygen:700' rel='stylesheet' type='text/css'/>
         <link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'/>
         <link href='http://fonts.googleapis.com/css?family=Titillium+Web:700' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=ABeeZee' rel='stylesheet' type='text/css'/>
         <link href='http://fonts.googleapis.com/css?family=Lusitana:700' rel='stylesheet' type='text/css'/>
-        <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'/>-->
+        <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'/>
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('js/jquery-ui-date/css/redmond/jquery-ui-1.10.3.custom.css') ?>" />
         <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
         <!--[if lt IE 9]>
@@ -59,7 +59,7 @@
                                 </a>
                             </li>
                         </ul>
-                        <form class="navbar-search pull-left">
-                            <input type="text" class="search-query" placeholder="Search" style="width: 100px;">
+                        <form class="navbar-search pull-left" method="post" action="<?php echo site_url(); ?>/search">
+                            <input id="inputsearch" type="text" class="search-query" placeholder="Search" style="width: 100px;">
                             <div class="icon-search"></div>
                         </form>

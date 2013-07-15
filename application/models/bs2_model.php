@@ -39,4 +39,11 @@ class Bs2_model extends CI_Model {
         $query = $this->db->get_where('we_tbl', array('member_tbl_member_id' => $idmember));
         return $query->result_array();
     }
+    
+     public function get_search() {
+        $a = $this->input->post('inputsearch');
+        $sqlstr = "select * from `member_tbl` a where a.firstname=" . $a;
+        $query = $this->db->query($sqlstr);
+        return $query->row_array();
+    }
 }

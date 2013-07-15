@@ -1,8 +1,8 @@
 <script src="<?php echo base_url("js/jquery.js") ?>"></script>
 <script src="<?php echo base_url("js/bootstrap.min.js") ?>"></script>
 <script src="<?php echo base_url("js/jquery-ui-1.9.2.custom.min.js") ?>"></script>
-<script src="<?php echo base_url("http://code.highcharts.com/highcharts.js") ?>"></script>
-<script src="<?php echo base_url("http://code.highcharts.com/modules/exporting.js") ?>"></script>
+<script src="<?php echo base_url("js/Highcharts/js/highcharts.js") ?>"></script>
+<script src="<?php echo base_url("js/Highcharts/js/modules/exporting.js") ?>"></script>
 <!-- the mousewheel plugin -->
 <script type="text/javascript" src="<?php echo base_url("js/jquery.mousewheel.js") ?>"></script>
 <!-- the jScrollPane script -->

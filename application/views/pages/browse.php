@@ -24,6 +24,8 @@
                             success: function(data) {
                                 var i = 0;
                                 var content = JSON.parse(data);
+                                var enterpreneur = "<h4 style=\"color: #5A5A5A;\">" + content.length + " Enterpreneurs have been found to have worked in " + browser + "</h4>";
+                                $('#enterpreneur1').html(enterpreneur);
 
                                 for (i = 0; i < content.length; i++) {
                                     var isi = "<div class=\"span4 profile_box\">";
@@ -52,49 +54,52 @@
                                     if (i == 0) {
                                         $('#change').html(isi);
                                     }
-                                    else {
+                                    else if (content.length != 0){
                                         $('#change').append(isi);
+                                    }
+                                    else {
+                                         $('#change').append("");
                                     }
                                 }
                             }
                         });
                     });
                     $('.button').click(function() {
-                      $('.button active').each(function (){
-                          $(this).attr('class', 'button');
-                      });
                         $(this).attr('class', 'button active');
+                        //location.reload(true);
+                        $('.button active').removeClass('button active').addClass('button');
+
 
                     });
 
                 });
             </script>
             <p style="text-align: center; margin-top: 40px">
-                <a href="#" class="button active">
-                    <span class="title" id="software" >Software/Internet</span>
+                <a href="#" class="button">
+                    <span class="title" id="Software" >Software/Internet</span>
                 </a>
                 <a href="#" class="button">
-                    <span class="title" id="computer">Comp/Electronics</span>
+                    <span class="title" id="Computer">Comp/Electronics</span>
                 </a>
                 <a href="#" class="button">
-                    <span class="title" id="media">Media</span>
+                    <span class="title" id="Media">Media</span>
                 </a>
                 <a href="#" class="button">
-                    <span class="title" id="finance">Finance</span>
+                    <span class="title" id="Finance">Finance</span>
                 </a>
                 <a href="#" class="button">
-                    <span class="title" id="healthcare">Healthcare</span>
+                    <span class="title" id="Healthcare">Healthcare</span>
                 </a>
             </p>
             <p style="text-align: center;margin-top: 40px">
                 <a href="#" class="button">
-                    <span class="title" id="transportation">Transportation</span>
+                    <span class="title" id="Transportation">Transportation</span>
                 </a>
                 <a href="#" class="button">
-                    <span class="title" id="legal">Legal</span>
+                    <span class="title" id="Legal">Legal</span>
                 </a>
                 <a href="#" class="button">
-                    <span class="title" id="food">Food & baverage</span>
+                    <span class="title" id="Food">Food & baverage</span>
                 </a>
                 <a href="#" class="button">
                     <span class="title" id="Music">Music/Entertainment</span>
@@ -106,8 +111,8 @@
 <div style="width: 100%;min-height: 100%; background: #f4f4f4;padding-top: 20px;">
     <div class="container">
         <div class="row">
-            <div class="span12">
-                <h4 style="color: #5A5A5A;">6 Enterpreneurs have been found to have worked in Software/Internet area</h4>
+            <div class="span12" id="enterpreneur1">
+
             </div>
         </div>
         <div class="row">

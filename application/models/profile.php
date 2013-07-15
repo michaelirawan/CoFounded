@@ -193,27 +193,45 @@ class Profile extends CI_Controller {
         $q = $query;
         return $q;
     }
-    
-    function get_message_member(){
+
+    function get_message_member() {
 
         $this->db->select('b.member_id, b.firstname, b.lastname, b.photo, a.message, a.date_scape, a.time_scape');
         $this->db->from('message_member as a');
         $this->db->join('member_tbl as b', 'a.member_id_to_message_id = b.member_id');
+
         $query = $this->db->get();
         $q = $query;
         return $q;
     }
-    
-    function get_browser_industry($where_industry){
+
+    function get_browser_industry($where_industry) {
         $this->db->select('*');
         $this->db->from('member_tbl');
-        $this->db->where('industry',$where_industry);
-        $query = $this->db->get()->result_array();
+        $this->db->where('industry', $where_industry);
         
+        $query = $this->db->get()->result_array();
+
         $q = json_encode($query);
         return $q;
     }
 
-}
+    function get_search() {
+        $search_query =  $this->input->post('inputsearch');
+        
+        $this->db->select('*');
+        $this->db->from('member_tbl');
+        $this->db->where('firstname', $search_query);
+        $this->db->or_where('lastname', $search_query);
+        $this->db->or_where('title', $search_query);
+        $this->db->or_where('industry', $search_query);
+        $this->db->or_where('city', $search_query);
+        $this->db->or_where('state', $search_query);
+        $this->db->or_where('country', $search_query);
+        $query = $this->db->get();
+        $q = $query;
+        return $q;
+    }
 
+}
 ?>
