@@ -4,6 +4,7 @@
         <div class="span12">
             <div class="well-route">
                 <div class="itemin">
+                    <h1>Search for : <?php echo $this->input->post('inputsearch');;?></h1>
                     <div class="row">                
                         <?php foreach ($member->result() as $member_item): ?>
                             <div class="span4 profile_box">

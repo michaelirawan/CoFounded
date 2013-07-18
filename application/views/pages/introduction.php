@@ -303,12 +303,14 @@
                                         <div class="row">
                                             <div class="span9 editable_content">
                                                 <div class="content">
-                                                    <h5 id="startup">Startup &nbsp;&nbsp;<a style="display: none;" data-target="#additional" data-toggle="modal" href="#" class="content-edit icon-pencil icon-white"></a></h5>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillu</p>
-                                                </div>
-                                                <div class="content">
-                                                    <h5>CV &nbsp;&nbsp;<a style="display: none;"data-target="#additional" data-toggle="modal" href="#" class="content-edit icon-pencil icon-white"></a></h5>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillu</p>
+                                                    <?php
+                                                    foreach ($etc->result() as $row) {
+                                                        ?>
+                                                        <p style="font-size: 14px; color: DarkSlateGray; text-align:justify;  font-family: 'Titillium Web', sans-serif"> <?php echo $row->type; ?> </p>
+                                                        <p style="text-align: justify"> <?php echo $row->etc; ?> </p>
+                                                        <?php
+                                                    }
+                                                    ?> 
                                                 </div>
                                             </div>
                                         </div><!-- row -->
@@ -320,21 +322,22 @@
                                                 <h3 id="myModalLabel">Additional Information</h3>
                                             </div>
                                             <div class="modal-body">
-                                                <form class="form-vertical">
+                                                <form class="form-vertical" method="post" action="<?php echo base_url('index.php/introduction/update_add_info'); ?>">
                                                     <div class="control-group">
                                                         <div class="controls">
-                                                            <input type="text" id="additional_name" placeholder="Additional name">
+                                                            <input type="text" name="additional_name" placeholder="Title Name Additional">
                                                         </div>
                                                         <div class="controls">
-                                                            <textarea rows="3" placeholder="Additional information"></textarea>
+                                                            <textarea rows="3" name="additional_information" placeholder="Additional information"></textarea>
                                                         </div>
+                                                    </div>
+                                                    <div class="controls">
+                                                        <button class="btn btn-primary">Save</button>
+                                                        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
                                                     </div>
                                                 </form>
                                             </div>
-                                            <div class="modal-footer">
-                                                <button class="btn btn-primary">Save</button>
-                                                <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-                                            </div>
+
                                         </div>
                                         <a data-target="#additional" data-toggle="modal" class="btn btn-primary btn-full"><i class="icon-plus icon-white"></i> Add new interest</a>
                                     </div><!-- modal -->

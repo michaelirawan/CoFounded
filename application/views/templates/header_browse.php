@@ -67,6 +67,6 @@
                             </li>
                         </ul>
                         <form class="navbar-search pull-left" method="post" action="<?php echo site_url(); ?>/search">
-                            <input id="inputsearch" type="text" class="search-query" placeholder="Search" style="width: 100px;">
+                            <input name="inputsearch" type="text" class="search-query" placeholder="Search" style="width: 100px;">
                             <div class="icon-search"></div>
                         </form>

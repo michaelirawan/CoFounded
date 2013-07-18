@@ -19,6 +19,7 @@ class View extends CI_Controller {
         $data['work_exp'] = $this->bs2_model->get_work($memberid);
         $data['edu'] = $this->bs2_model->get_edu($memberid);
         $data['skill'] = $this->bs2_model->get_skill($memberid);
+        $data['additional'] = $this->bs2_model->get_additional($memberid);
 
         $is_logged_in = $this->session->userdata('is_logged_in');
         if (!isset($is_logged_in) || $is_logged_in != true) {

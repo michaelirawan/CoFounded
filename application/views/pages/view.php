@@ -142,12 +142,11 @@
                                 <div class="accordion-inner">
                                     <div class="editable_content">
                                         <div class="content">
-                                            <p><b>Hobby</b></p>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillu</p>
-                                        </div>
-                                        <div class="content">
-                                            <p><b>Interest</b></p>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillu</p>
+                                            <?php foreach ($additional as $media_item): ?>                                               
+
+                                                <p style="color: DarkSlateGray; font-weight: bold; text-align:justify;  font-family:  'ABeeZee', sans-serif"> <?php echo $media_item['type'] ?>&nbsp;</p>
+                                                <p><?php echo $media_item['etc'] ?> </p>
+                                            <?php endforeach ?>
                                         </div>
                                     </div>
                                 </div>
@@ -213,7 +212,7 @@
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script src=<?php echo base_url('js/jquery.js') ?>></script>
-<script type="text/javascript" src="<?php echo base_url(); ?>js/style2.js"></script>
+
 <script src=<?php echo base_url('js/bootstrap.min.js') ?>></script>
 <script src=<?php echo base_url('js/jquery-ui-1.9.2.custom.min.js') ?>></script>
 <script type="text/javascript" src=<?php echo base_url('js/jquery.mousewheel.js') ?>></script>

@@ -148,6 +148,17 @@ class Profile extends CI_Controller {
         $q = $query;
         return $q;
     }
+    
+    function get_additional() {
+        $this->db->select('a.additional_id, a.type, a.etc');
+        $this->db->from('additional_tbl as a');
+        $this->db->join('member_tbl as b', 'a.member_tbl_member_id = b.member_id');
+        $this->db->where('b.email', $this->session->userdata('email'));
+        $query = $this->db->get();
+        $q = $query;
+        return $q;
+    }
+    
 
     function get_media_youtube() {
         $this->db->select('a.url');
@@ -231,12 +242,13 @@ class Profile extends CI_Controller {
         $this->db->select('*');
         $this->db->from('member_tbl');
         $this->db->like(mb_strtolower('firstname'), mb_strtolower($search_query));
-//        $this->db->or_where('lastname', $search_query);
-//        $this->db->or_where('title', $search_query); 
-//        $this->db->or_where('industry', $search_query);
-//        $this->db->or_where('city', $search_query);
-//        $this->db->or_where('state', $search_query);
-//        $this->db->or_where('country', $search_query);
+        $this->db->or_like(mb_strtolower('lastname'), mb_strtolower($search_query));
+        $this->db->or_like(mb_strtolower('title'), mb_strtolower($search_query));
+        $this->db->or_like(mb_strtolower('industry'), mb_strtolower($search_query));
+        $this->db->or_like(mb_strtolower('city'), mb_strtolower($search_query));
+        $this->db->or_like(mb_strtolower('state'), mb_strtolower($search_query));
+        $this->db->or_like(mb_strtolower('country'), mb_strtolower($search_query));
+        
         $query = $this->db->get();
         $q = $query;
         return $q;

@@ -18,6 +18,7 @@ class Introduction extends CI_Controller {
             $data['work_exp'] = $this->profile->get_work_exp();
             $data['skill'] = $this->profile->get_work_skill();
             $data['edu'] = $this->profile->get_edu_exp();
+            $data['etc'] = $this->profile->get_additional();
             $data['media_youtube'] = $this->profile->get_media_youtube();
             $data['media_slideshare'] = $this->profile->get_media_slideshare();
 
@@ -101,6 +102,15 @@ class Introduction extends CI_Controller {
         $this->load->model('membership_model');
         if ($query = $this->membership_model->update_work_exp()) {
             redirect('/introduction');
+        } else {
+            
+        }
+    }
+    
+    function update_add_info() {
+        $this->load->model('membership_model');
+        if ($query = $this->membership_model->update_addtional()) {
+            redirect('/introduction#1B');
         } else {
             
         }

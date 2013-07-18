@@ -114,6 +114,22 @@ class Membership_model extends CI_Model {
         return $insert;
     }
 
+    function update_addtional() {
+        $this->db->select('member_id');
+        $this->db->from('member_tbl');
+        $this->db->where('email', $this->session->userdata('email'));
+        $query = $this->db->get();
+        $row = $query->row();
+
+        $new_skill = array(
+            'type' => $this->input->post('additional_name'),
+            'etc' => $this->input->post('additional_information'),
+            'member_tbl_member_id' => $row->member_id
+        );
+        $insert = $this->db->insert('additional_tbl', $new_skill);
+        return $insert;
+    }
+
     function insert_new_media_youtube() {
         $this->db->select('member_id');
         $this->db->from('member_tbl');
