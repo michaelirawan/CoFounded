@@ -6,6 +6,7 @@ class View extends CI_Controller {
         parent::__construct();
         $this->load->model('bs2_model');
         $this->load->model('profile');
+        
     }
 
     function index() {
@@ -48,6 +49,14 @@ class View extends CI_Controller {
         }
     }
     
-     
+    function insert_new_message1() {
+        $this->load->model('profile');
+        $q = $this->profile->insert_new_message();
+        if ($q) {
+            redirect('/view/index/id/'.$this->input->post('member_id_message'));
+        } else {
+            
+        }
+    }
 
 }

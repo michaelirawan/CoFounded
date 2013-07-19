@@ -8,9 +8,25 @@ class Bs2_model extends CI_Model {
 
     public function get_member($idmember = FALSE) {
         if ($idmember === FALSE) {
-            $sqlstr = "select * from `member_tbl` a";
+            $sqlstr = "select * from `member_tbl` a LIMIT 6";
             $query = $this->db->query($sqlstr);
             //$query = $this->db->get('member_tbl');
+            
+            return $query->result_array();
+        }
+
+        //$query = $this->db->get_where('member_tbl', array('member_id' => $idmember));
+        $sqlstr = "select * from `member_tbl` a where a.member_id=" . $idmember;
+        $query = $this->db->query($sqlstr);
+        return $query->row_array();
+    }
+    
+    public function get_member_all($idmember = FALSE) {
+        if ($idmember === FALSE) {
+            $sqlstr = "select * from `member_tbl` a ";
+            $query = $this->db->query($sqlstr);
+            //$query = $this->db->get('member_tbl');
+            
             return $query->result_array();
         }
 

@@ -482,7 +482,7 @@
                                         <form method="post" action="<?php echo base_url('index.php/introduction/insert_new_media_slideshare'); ?>">
                                             <div class="control-group">
                                                 <div class="controls">
-                                                    <input name="input_slideshare" type="text" id="input_slideshare" placeholder="Type the URL here..." style="width: 95%">
+                                                    <input name="input_slideshare" type="text" id="input_slideshare" placeholder="Type the embed here..." style="width: 95%">
                                                 </div>
                                             </div>
                                             <div class="controls">

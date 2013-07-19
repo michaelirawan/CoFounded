@@ -54,11 +54,11 @@
                                     if (i == 0) {
                                         $('#change').html(isi);
                                     }
-                                    else if (content.length != 0){
+                                    else if (content.length != 0) {
                                         $('#change').append(isi);
                                     }
                                     else {
-                                         $('#change').append("");
+                                        $('#change').append("");
                                     }
                                 }
                             }
@@ -129,7 +129,9 @@
                                         <?php echo $member_item['firstname'] . " " . $member_item['lastname'] ?>
                                     </p>
                                     <p><?php echo $member_item['title'] . ", "; ?> <br><?php echo $member_item['industry']; ?><br> <?php echo $member_item['city'] . ", " . $member_item['state'] . ", " . $member_item['country']; ?></p>
+                                
                                 </div>
+                                <br/>
                                 <div class="looking-for">
                                     <p>Looking For: <?php echo $member_item['partnerreq']; ?></p>
                                 </div>
@@ -143,7 +145,8 @@
                             </div>
                         </div>
                     <?php endforeach ?>
-                </div><!-- row -->
+                </div><!--row-->                     
+                <a style="text-align: right;" href=<?php echo site_url("/browse_all") ?>>See all our list of potential partners</a>
             </div>
         </div>
         <div class="row">

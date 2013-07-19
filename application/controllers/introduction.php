@@ -83,7 +83,7 @@ class Introduction extends CI_Controller {
     function update_skill() {
         $this->load->model('membership_model');
         if ($query = $this->membership_model->update_skill()) {
-            redirect('/introduction#1B');
+            redirect('/introduction');
         } else {
             
         }

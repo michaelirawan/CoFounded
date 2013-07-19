@@ -157,17 +157,24 @@
             </div>
         </div>
     </div><!-- row -->
-    <div class="row">
-        <div class="span8">
-            <div class="well-route">
-                <div class="itemin">
-                    <h3>Message</h3>
-                    <textarea></textarea>
-                    <btn class="btn btn-primary" style="position: right;">Send</btn>
+    <?php if ($this->session->userdata('email') != null && $this->session->userdata('email') != $member['email']) { ?>
+        <div class="row">
+            <div class="span8">
+                <div class="well-route">
+                    <form method="post" action="<?php echo base_url('index.php/view/insert_new_message1'); ?>">
+
+                        <div class="itemin">
+                            <h3>Message</h3>
+                            <textarea rows="3"  id="message_input" placeholder="Enter Your Message" name="message_input"> </textarea>
+                            <input type="hidden" name="member_id_message" value="<?php echo $member['member_id'] ?>" />
+                            <button class="btn btn-primary" style="position: right;">Send</button>
+                        </div>
+                    </form>
+
                 </div>
             </div>
         </div>
-    </div><!-- row -->
+    <?php } ?><!-- row -->
 </div> <!-- /container -->
 <div class="footer-sitemap">
     <div class="content">

@@ -35,11 +35,6 @@ class Membership_model extends CI_Model {
         return $insert;
     }
 
-    function update_img() {
-        $update_image = array(
-        );
-    }
-
     function update_profile() {
         $update_data = array(
             'firstname' => $this->input->post('fnama'),
@@ -139,7 +134,7 @@ class Membership_model extends CI_Model {
 
 
         $new_youtube = array(
-            'url' => $this->input->post('input_Youtube'),
+            'url' => '<iframe width="240" height="180" src="//www.youtube.com/embed/'.substr($this->input->post('input_Youtube'), 31).'" frameborder="0" allowfullscreen></iframe>',
             'mediaref_tbl_mediaref_id' => 1,
             'member_tbl_member_id' => $row->member_id
         );
@@ -163,5 +158,7 @@ class Membership_model extends CI_Model {
         $insert = $this->db->insert('media_tbl', $new_youtube);
         return $insert;
     }
+
+    
 
 }

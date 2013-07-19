@@ -105,10 +105,10 @@
                                     </div>
                                 </div>
                             <?php endforeach ?>
-                        </div><!--
-                          row
-                        -->
+                        </div><!--row-->                     
+                        <a style="text-align: right;" href=<?php echo site_url("/browse_all") ?>>See all our list of potential partners</a>
                     </div>
+                    
                 </div>
             </div>
         </div><!-- span -->

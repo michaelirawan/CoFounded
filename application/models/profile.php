@@ -290,6 +290,31 @@ class Profile extends CI_Controller {
         $this->db->update('member_tbl',$data);
         return true;
     }
+    
+    function insert_new_message() {
+        $this->db->select('member_id');
+        $this->db->from('member_tbl');
+        $this->db->where('email', $this->session->userdata('email'));
+        $query = $this->db->get();
+        $row = $query->row();
+
+        $this->load->helper('date');
+        $time = time();
+        date_default_timezone_set('Asia/Jakarta');
+        $tgl = date("Y-m-d", $time);
+        $waktu = date("H:i:s", $time);
+
+
+        $new_message = array(
+            'member_id_from_message_id' => $row->member_id,
+            'member_id_to_message_id' => $this->input->post('member_id_message'),
+            'message' => $this->input->post('message_input'),
+            'date_scape' => $tgl,
+            'time_scape' => $waktu
+        );
+        $this->db->insert('message_member', $new_message);
+        return true;
+    }
 
 }
 
