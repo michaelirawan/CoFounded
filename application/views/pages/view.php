@@ -80,7 +80,7 @@
                                         <div class="content">
                                             <?php foreach ($work_exp as $media_item): ?>                                               
 
-                                                <p> <b><?php echo $media_item['employer'] ?> </b> - <?php echo $media_item['jobtitle'] ?> (<?php echo $media_item['periodfrom'] ?> - <?php echo $media_item['periodto'] ?>) </p>
+                                                <p> <b><?php echo $media_item['employer'] ?> </b> - <?php echo $media_item['jobtitle'] ?> (<?php echo date("d F Y",strtotime($media_item['periodfrom'])) ?> - <?php echo date("d F Y",strtotime($media_item['periodto']))?>) </p>
 
                                                 <p><?php echo $media_item['jobdesc'] ?></p>
 
@@ -104,7 +104,7 @@
                                             <?php foreach ($edu as $media_item): ?>                                               
 
                                                 <p style="color: DarkSlateGray; font-weight: bold; text-align:justify;  font-family:  'ABeeZee', sans-serif"> <?php echo $media_item['school'] ?> &nbsp; (<?php echo $media_item['degree'] ?>) </p>
-                                                <p><?php echo $media_item['studyarea'] ?> , <?php echo $media_item['attdate'] ?></p>
+                                                <p><?php echo $media_item['studyarea'] ?> , <?php echo date("d F Y",strtotime($media_item['attdate']))?></p>
                                                 <p><?php echo $media_item['activities'] ?></p> 
                                             <?php endforeach ?>
                                         </div>

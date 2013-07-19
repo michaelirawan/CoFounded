@@ -16,6 +16,7 @@ class Dashboard extends CI_Controller {
         $data['potential'] = $this->profile->get_potential_matches();
         $data['connect'] = $this->profile->get_your_connection();
         $data['message'] = $this->profile->get_message_member();
+        $data['view'] = $this->profile->get_view();
         
         
 

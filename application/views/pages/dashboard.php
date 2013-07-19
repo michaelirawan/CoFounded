@@ -22,7 +22,7 @@
                     marginBottom: 25
                 },
                 title: {
-                    text: 'Last 90 days',
+                    text: 'Last 365 days',
                     x: -20 //center
                 },
                 xAxis: {
@@ -42,7 +42,7 @@
                 tooltip: {
                     formatter: function() {
                         return '<b>' + this.series.name + '</b><br/>' +
-                                this.x + ': ' + this.y + '°C';
+                                this.x + ': ' + this.y + 'view';
                     }
                 },
                 legend: {
@@ -54,8 +54,8 @@
                     borderWidth: 0
                 },
                 series: [{
-                        name: 'Tokyo',
-                        data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
+                        name: 'People',
+                        data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 50, 26.5, 23.3, 18.3, 13.9, 9.6]
                     }]
             });
         });
@@ -146,8 +146,11 @@
                     </div>
                 </div>
             </div>
+            
         </div>
+        
     </div>
+    There are <?php echo $view ?> views
 </div> <!-- /container -->
 <div class="footer-sitemap">
     <div class="content">

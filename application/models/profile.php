@@ -148,7 +148,7 @@ class Profile extends CI_Controller {
         $q = $query;
         return $q;
     }
-    
+
     function get_additional() {
         $this->db->select('a.additional_id, a.type, a.etc');
         $this->db->from('additional_tbl as a');
@@ -158,7 +158,6 @@ class Profile extends CI_Controller {
         $q = $query;
         return $q;
     }
-    
 
     function get_media_youtube() {
         $this->db->select('a.url');
@@ -248,7 +247,7 @@ class Profile extends CI_Controller {
         $this->db->or_like(mb_strtolower('city'), mb_strtolower($search_query));
         $this->db->or_like(mb_strtolower('state'), mb_strtolower($search_query));
         $this->db->or_like(mb_strtolower('country'), mb_strtolower($search_query));
-        
+
         $query = $this->db->get();
         $q = $query;
         return $q;
@@ -272,25 +271,25 @@ class Profile extends CI_Controller {
             $data = array('upload_data' => $this->upload->data('picture')); // array
         }
 
-        $update_img = 'img/img_new' . $this->input->post('id_member_img').'.jpg';
+        $update_img = 'img/img_new' . $this->input->post('id_member_img') . '.jpg';
 
         $data = array(
             'photo' => $update_img
         );
         $this->db->where('member_id', $this->input->post('id_member_img'));
-        $this->db->update('member_tbl',$data);
+        $this->db->update('member_tbl', $data);
         return true;
     }
-    
-    function del_img(){
+
+    function del_img() {
         $data = array(
             'photo' => 'img/profile_blank.jpg'
         );
         $this->db->where('member_id', $this->input->post('id_member_img'));
-        $this->db->update('member_tbl',$data);
+        $this->db->update('member_tbl', $data);
         return true;
     }
-    
+
     function insert_new_message() {
         $this->db->select('member_id');
         $this->db->from('member_tbl');
@@ -314,6 +313,30 @@ class Profile extends CI_Controller {
         );
         $this->db->insert('message_member', $new_message);
         return true;
+    }
+
+    function view_counter($id_member) {
+        $this->db->select('viewcounter');
+        $this->db->from('member_tbl');
+        $this->db->where('member_id',$id_member);
+        $query = $this->db->get();
+        $q = $query->row()->viewcounter;
+        $q++;
+        $data = array(
+            'viewcounter' => $q
+        );
+        $this->db->where('member_id', $id_member);
+        $this->db->update('member_tbl', $data);
+        return true;
+    }
+    
+    function get_view(){
+        $this->db->select('viewcounter');
+        $this->db->from('member_tbl');
+        $this->db->where('email', $this->session->userdata('email'));
+        $query = $this->db->get();
+        $q = $query->row();
+        return $q->viewcounter;
     }
 
 }

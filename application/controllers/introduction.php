@@ -137,18 +137,19 @@ class Introduction extends CI_Controller {
     function upload_img(){
         $this->load->model('profile');
         $q = $this->profile->upload_img();
-        
         if($q){
-            redirect("/introduction");
+            redirect('/introduction');
+        }
+        else{
+            
         }
     }
     
     function delete_img(){
         $this->load->model('profile');
-        $q = $this->profile->del_img();
-        
+        $q = $this->profile->del_img(); 
         if($q){
-            redirect("/introduction");
+            redirect('/introduction');
         }
     }
 

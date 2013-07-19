@@ -107,7 +107,7 @@
                                                     foreach ($work_exp->result() as $row) {
                                                         ?>
                                                         <h5> <?php echo $row->employer; ?> </h5>
-                                                        <p><?php echo $row->jobtitle; ?> (<?php echo $row->periodfrom; ?> - <?php echo $row->periodto; ?> )</p>
+                                                        <p><?php echo $row->jobtitle; ?> (<?php echo date("d F Y",strtotime($row->periodfrom));?> - <?php echo date("d F Y",strtotime($row->periodto)); ?> )</p>
                                                         <p style="text-align: justify"> <?php echo $row->jobdesc; ?> </p>
                                                         <?php
                                                     }
@@ -184,7 +184,7 @@
                                                     foreach ($edu->result() as $row) {
                                                         ?>
                                                         <p style="font-size: 14px; color: DarkSlateGray; text-align:justify;  font-family: 'Titillium Web', sans-serif"> <?php echo $row->school; ?> &nbsp; (<?php echo $row->degree; ?>)</p>
-                                                        <p style="text-align: justify"> <?php echo $row->studyarea; ?>,&nbsp; <?php echo $row->attdate; ?> </p>
+                                                        <p style="text-align: justify"> <?php echo $row->studyarea; ?>,&nbsp; <?php echo date("d F Y",strtotime($row->attdate)); ?> </p>
                                                         <p style="text-align: justify"> <?php echo $row->activities; ?> </p>
                                                         <?php
                                                     }

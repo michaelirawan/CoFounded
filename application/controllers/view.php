@@ -28,11 +28,14 @@ class View extends CI_Controller {
             $this->load->view('templates/banner', $data);
             $this->load->view('pages/view', $data);
             $this->load->view('templates/footer');
+            $this->load-model('profile');
+            $this->profile->view_counter($memberid);
         } else {
             $this->load->view('templates/header', $data);
             $this->load->view('templates/banner_log_in_home', $data);
             $this->load->view('pages/view', $data);
             $this->load->view('templates/footer');
+            $this->profile->view_counter($memberid);
         }
     }
 

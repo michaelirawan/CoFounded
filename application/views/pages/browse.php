@@ -74,6 +74,8 @@
 
                 });
             </script>
+
+            
             <p style="text-align: center; margin-top: 40px">
                 <a href="#" class="button">
                     <span class="title" id="Software" >Software/Internet</span>
@@ -129,7 +131,7 @@
                                         <?php echo $member_item['firstname'] . " " . $member_item['lastname'] ?>
                                     </p>
                                     <p><?php echo $member_item['title'] . ", "; ?> <br><?php echo $member_item['industry']; ?><br> <?php echo $member_item['city'] . ", " . $member_item['state'] . ", " . $member_item['country']; ?></p>
-                                
+
                                 </div>
                                 <br/>
                                 <div class="looking-for">
