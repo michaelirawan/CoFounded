@@ -316,28 +316,79 @@ class Profile extends CI_Controller {
     }
 
     function view_counter($id_member) {
-        $this->db->select('viewcounter');
-        $this->db->from('member_tbl');
-        $this->db->where('member_id',$id_member);
+        $this->load->helper('date');
+        $time = time();
+        date_default_timezone_set('Asia/Jakarta');
+        $tahun = date("Y", $time);
+        $bulan = date("m", $time);
+
+        $this->db->select('bulan');
+        $this->db->from('view_counter');
+        $this->db->where('member_id_member_view', $id_member);
+        $query_bulan = $this->db->get();
+        $bulan_query = $query_bulan->row()->bulan;
+
+        $this->db->select('tahun');
+        $this->db->from('view_counter');
+        $this->db->where('member_id_member_view', $id_member);
+        $query_tahun = $this->db->get();
+        $tahun_query = $query_tahun->row()->tahun;
+
+        $this->db->select('total');
+        $this->db->from('view_counter');
+        $this->db->where('member_id_member_view', $id_member);
         $query = $this->db->get();
-        $q = $query->row()->viewcounter;
+        $q = $query->row()->total;
         $q++;
         $data = array(
-            'viewcounter' => $q
+            'total' => $q
         );
-        $this->db->where('member_id', $id_member);
-        $this->db->update('member_tbl', $data);
+        $this->db->where('member_id_member_view', $id_member);
+        $this->db->where('bulan', $bulan);
+        $this->db->where('tahun', $tahun);
+        
+        if ($bulan_query == $bulan && $tahun_query == $tahun) {
+            $this->db->update('view_counter', $data);
+        } else {
+            $new_member_statistic = array(
+                'member_id_member_view' => $id_member,
+                'tahun' => $tahun,
+                'bulan' => $bulan,
+                'total' => 1
+            );
+            $insert2 = $this->db->insert('view_counter', $new_member_statistic);
+        }
+
         return true;
     }
+
     
-    function get_view(){
-        $this->db->select('viewcounter');
-        $this->db->from('member_tbl');
-        $this->db->where('email', $this->session->userdata('email'));
-        $query = $this->db->get();
-        $q = $query->row();
-        return $q->viewcounter;
+
+    function get_list_emp($num, $offset) {
+        $data = $this->db->get('member_tbl', $num, $offset);
+
+        return $data->result();
     }
+
+    function get_total_rows() {
+
+        $this->db->select('member_id');
+        $this->db->from('member_tbl');
+        $query = $this->db->get();
+        $q = $query->num_rows();
+        return $q;
+    }
+
+    function get_viewer_dashboard_total() {
+        $this->db->select('a.total, a.bulan, a.tahun');
+        $this->db->from('view_counter as a');
+        $this->db->join('member_tbl as b', 'a.member_id_member_view = b.member_id');
+        $this->db->where('b.email', $this->session->userdata('email'));
+        $query = $this->db->get()->result_array();
+        $q = json_encode($query);
+        return $q;
+    }
+    
 
 }
 

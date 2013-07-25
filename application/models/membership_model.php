@@ -31,8 +31,34 @@ class Membership_model extends CI_Model {
             'state' => 'edit state',
             'country' => 'edit country'
         );
-        $insert = $this->db->insert('member_tbl', $new_member_insert_data);
-        return $insert;
+        $insert1 = $this->db->insert('member_tbl', $new_member_insert_data);
+        
+        $this->db->select('member_id');
+        $this->db->from('member_tbl');
+        $this->db->where('email', $this->input->post('email'));
+        $query = $this->db->get();
+        $id_member_baru = $query->row()->member_id;
+        
+        $this->load->helper('date');
+        $time = time();
+        date_default_timezone_set('Asia/Jakarta');
+        $tahun = date("Y", $time);
+        $bulan = date("m", $time);
+        
+        $new_member_statistic = array(
+            'member_id_member_view' => $id_member_baru,
+            'tahun' => $tahun,
+            'bulan' => $bulan,
+            'total' => 0
+        );
+        $insert2 = $this->db->insert('view_counter', $new_member_statistic);
+        
+        if($insert1 && $insert2){
+            return true;
+        }
+        else            
+            return false;
+        
     }
 
     function update_profile() {

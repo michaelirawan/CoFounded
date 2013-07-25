@@ -13,25 +13,49 @@
         $('.latest_comment').jScrollPane();
         $('.connection').jScrollPane();
         var chart;
+        var tgl = new Date().getDate();
+        function requestData()
+        {
+            $.ajax({
+                type: "POST",
+                url: "http://localhost/bizshout2/index.php/dashboard/get_viewer_dashboard_total",
+                success: function(data) {
+                    var a = JSON.parse(data);
+                    var i = 0;
+                    var chartdata = [];
+
+                    for (i = 0; i < a.length; i++) {
+                        chartdata.push([Date.UTC(a[i].tahun, (parseInt(a[i].bulan) - 1), tgl), parseInt(a[i].total)]);
+                    }
+                    chart.series[0].setData(chartdata);
+                }
+            });
+        }
         $(document).ready(function() {
             chart = new Highcharts.Chart({
                 chart: {
                     renderTo: 'container',
                     type: 'line',
                     marginRight: 130,
-                    marginBottom: 25
+                    marginBottom: 25,
+                    events: {
+                        load: requestData
+                    }
                 },
                 title: {
-                    text: 'Last 365 days',
+                    text: 'Your profile statistic',
                     x: -20 //center
                 },
                 xAxis: {
-                    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-                        'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+                    type: 'datetime',
+                    dateTimeLabelFormats: {
+                        month: '%d %b',
+                    },
+                    tickInterval: 86400000 * 31
                 },
                 yAxis: {
                     title: {
-                        text: 'Page Impressions'
+                        text: 'People'
                     },
                     plotLines: [{
                             value: 0,
@@ -42,7 +66,7 @@
                 tooltip: {
                     formatter: function() {
                         return '<b>' + this.series.name + '</b><br/>' +
-                                this.x + ': ' + this.y + 'view';
+                                Highcharts.dateFormat('%b', this.x) + ': ' + this.y + ' people';
                     }
                 },
                 legend: {
@@ -55,7 +79,7 @@
                 },
                 series: [{
                         name: 'People',
-                        data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 50, 26.5, 23.3, 18.3, 13.9, 9.6]
+                        data: []
                     }]
             });
         });
@@ -64,6 +88,7 @@
 </script>
 
 <div style="margin-bottom: 30px;margin-top: 40px">
+    <p id="member_dashboard" style="display: none;"><?php echo $data_member ?></p>
 </div>
 <div class="container-1200 body">
     <div class="row-fluid">
@@ -146,11 +171,10 @@
                     </div>
                 </div>
             </div>
-            
+
         </div>
-        
+
     </div>
-    There are <?php echo $view ?> views
 </div> <!-- /container -->
 <div class="footer-sitemap">
     <div class="content">

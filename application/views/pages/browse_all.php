@@ -1,14 +1,53 @@
-<?php
-
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-?>
-<div style="margin-bottom: 30px;margin-top: 40px">
-</div>
-<div class="container">
+<div class="container" style="min-height: 20%;margin-bottom: 20px;margin-top: 40px">
     <div class="row">
+        <div class="span12">
+            <script src=<?php echo base_url('js/jquery.js') ?>></script>
+            <script src=<?php echo base_url('js/bootstrap.min.js') ?>></script>
+            <!-- the mousewheel plugin -->
+            <script type="text/javascript" src=<?php echo base_url('js/jquery.mousewheel.js') ?>></script>
+            <!-- the jScrollPane script -->
+            <script type="text/javascript" src=<?php echo base_url('js/jquery.jscrollpane.js') ?>></script>
+            <p style="text-align: center; margin-top: 40px">
+                <a href="#" class="button">
+                    <span class="title" id="Software" >Software/Internet</span>
+                </a>
+                <a href="#" class="button">
+                    <span class="title" id="Computer">Comp/Electronics</span>
+                </a>
+                <a href="#" class="button">
+                    <span class="title" id="Media">Media</span>
+                </a>
+                <a href="#" class="button">
+                    <span class="title" id="Finance">Finance</span>
+                </a>
+                <a href="#" class="button">
+                    <span class="title" id="Healthcare">Healthcare</span>
+                </a>
+            </p>
+            <p style="text-align: center;margin-top: 40px">
+                <a href="#" class="button">
+                    <span class="title" id="Transportation">Transportation</span>
+                </a>
+                <a href="#" class="button">
+                    <span class="title" id="Legal">Legal</span>
+                </a>
+                <a href="#" class="button">
+                    <span class="title" id="Food">Food & baverage</span>
+                </a>
+                <a href="#" class="button">
+                    <span class="title" id="Music">Music/Entertainment</span>
+                </a>
+            </p>
+        </div>
+    </div>
+</div>
+<div style="width: 100%;min-height: 100%; background: #f4f4f4;padding-top: 20px;">
+    <div class="container">
+        <div class="row">
+            <div class="span12" id="enterpreneur1">
+
+            </div>
+        </div>
         <div class="span12">
             <div class="row">
                 <div class="span12">
