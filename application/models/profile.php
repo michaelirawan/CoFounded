@@ -213,16 +213,7 @@ class Profile extends CI_Controller {
         return $q;
     }
 
-    function get_message_member() {
 
-        $this->db->select('b.member_id, b.firstname, b.lastname, b.photo, a.message, a.date_scape, a.time_scape');
-        $this->db->from('message_member as a');
-        $this->db->join('member_tbl as b', 'a.member_id_to_message_id = b.member_id');
-
-        $query = $this->db->get();
-        $q = $query;
-        return $q;
-    }
 
     function get_browser_industry($where_industry) {
         $this->db->select('*');
@@ -326,28 +317,29 @@ class Profile extends CI_Controller {
         $this->db->from('view_counter');
         $this->db->where('member_id_member_view', $id_member);
         $query_bulan = $this->db->get();
-        $bulan_query = $query_bulan->row()->bulan;
+        $bulan_query = $query_bulan->num_rows();
 
         $this->db->select('tahun');
         $this->db->from('view_counter');
         $this->db->where('member_id_member_view', $id_member);
         $query_tahun = $this->db->get();
-        $tahun_query = $query_tahun->row()->tahun;
+        $tahun_query = $query_tahun->num_rows();
 
-        $this->db->select('total');
-        $this->db->from('view_counter');
-        $this->db->where('member_id_member_view', $id_member);
-        $query = $this->db->get();
-        $q = $query->row()->total;
-        $q++;
-        $data = array(
-            'total' => $q
-        );
-        $this->db->where('member_id_member_view', $id_member);
-        $this->db->where('bulan', $bulan);
-        $this->db->where('tahun', $tahun);
-        
-        if ($bulan_query == $bulan && $tahun_query == $tahun) {
+
+
+        if ($bulan_query != 0 && $tahun_query != 0) {
+            $this->db->select('total');
+            $this->db->from('view_counter');
+            $this->db->where('member_id_member_view', $id_member);
+            $query = $this->db->get();
+            $q = $query->row()->total;
+            $q++;
+            $data = array(
+                'total' => $q
+            );
+            $this->db->where('member_id_member_view', $id_member);
+            $this->db->where('bulan', $bulan);
+            $this->db->where('tahun', $tahun);
             $this->db->update('view_counter', $data);
         } else {
             $new_member_statistic = array(
@@ -358,11 +350,8 @@ class Profile extends CI_Controller {
             );
             $insert2 = $this->db->insert('view_counter', $new_member_statistic);
         }
-
         return true;
     }
-
-    
 
     function get_list_emp($num, $offset) {
         $data = $this->db->get('member_tbl', $num, $offset);
@@ -388,7 +377,52 @@ class Profile extends CI_Controller {
         $q = json_encode($query);
         return $q;
     }
+
+    function get_where_last_comment_id() {
+        
+        
+        $this->db->distinct();
+        $this->db->select('a.member_id_from_message_id');
+        $this->db->from('message_member as a');
+        $this->db->join('member_tbl as b', 'a.member_id_to_message_id = b.member_id');
+        $this->db->where('b.email', $this->session->userdata('email'));
+        $query = $this->db->get()->result_array();
+
+        $q = json_encode($query);
+        return $q;
+    }
     
+    function the_last_comment($last_id){
+                
+        $this->db->select_max('a.id_message');
+        $this->db->from('message_member as a');
+        $this->db->join('member_tbl as b', 'a.member_id_to_message_id = b.member_id');
+        $this->db->where('a.member_id_from_message_id', $last_id);
+        $query = $this->db->get();
+        $id = $query->row();
+        
+        $this->db->select('b.member_id, b.firstname, b.lastname, a.message');
+        $this->db->from('message_member as a');
+        $this->db->join('member_tbl as b', 'a.member_id_from_message_id = b.member_id');
+        $this->db->where('a.id_message', $id->id_message);
+        $query2 = $this->db->get()->result_array();
+
+        $q = json_encode($query2);
+        return $q;
+    }
+    
+        function get_message_member($where_id) {
+
+        $this->db->select('b.member_id, b.firstname, b.lastname, b.photo, a.message, a.date_scape, a.time_scape');
+        $this->db->from('message_member as a');
+        $this->db->join('member_tbl as b', 'a.member_id_to_message_id = b.member_id');
+       
+        $this->db->where('a.member_id_from_message_id', $where_id);
+        $query = $this->db->get()->result_array();
+
+        $q = json_encode($query);
+        return $q;
+    }
 
 }
 

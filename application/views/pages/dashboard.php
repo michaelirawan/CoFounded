@@ -14,8 +14,102 @@
         $('.connection').jScrollPane();
         var chart;
         var tgl = new Date().getDate();
-        function requestData()
-        {
+        $.ajax({
+            type: "POST",
+            url: "http://localhost/bizshout2/index.php/dashboard/get_where_last_comment",
+            success: function(data) {
+                var a = JSON.parse(data);
+                var i = 0;
+                for (i = 0; i < a.length; i++) {
+                    var where_id = '<input type="hidden" name="where_id" value="' + a[i].member_id_from_message_id + '" />';
+                    $('#chatbox_id').html(where_id);
+                    
+                    var id_last = a[i].member_id_from_message_id;
+                    
+                    
+                    var isi = "<div class=\"item click\" data-toggle=\"modal\" id=\"" + id_last + "\" data-target=\"#myModal\">";
+                    isi += " <p><b>From: </b><a href=\"#\"><b>"+id_last+"aaaaaaaaaaa</b></a></p>";
+                    isi += "<p>aaaa<a href=\"#\">Read more</a></p>";
+                    isi += " </div>";
+
+                    if (i == 0) {
+                        $('#lastest_comments').html(isi);
+                    }
+                    else if (a.length != 0) {
+                        $('#lastest_comments').append(isi);
+                    }
+                    else {
+                        $('#lastest_comments').append("");
+                    }
+
+                    $.ajax({
+                        type: "POST",
+                        url: "http://localhost/bizshout2/index.php/dashboard/the_last",
+                        data: "last_id=" + id_last,
+                        success: function(data) {
+                            var d = JSON.parse(data);
+                            var k = 0;
+                            for (k = 0; k < d.length; k++) {
+                                
+
+
+                            }
+
+
+                        }
+                    });
+
+
+
+//                    $('.item').click(function() {
+//
+//                        var id = $(this).attr('id');
+//                        $.ajax({
+//                            type: "POST",
+//                            url: "http://localhost/bizshout2/index.php/dashboard/get_message_chat",
+//                            data: 'where_id=' + id,
+//                            success: function(data) {
+//                                var b = JSON.parse(data);
+//                                var j = 0;
+//                                for (j < 0; j < b.length; j++) {
+//                                    var c = "<div class=\"chat\">";
+//                                    c += "<div class=\"image-chat\">";
+//                                    c += "<img src =http://localhost/bizshout2/" + b[j].photo + ">";
+//                                    c += "</div>";
+//                                    c += "<div class=\"info-chat\">";
+//                                    c += "<div class=\"name-chat sender\">";
+//                                    c += b[j].firstname + " " + b[j].lastname;
+//                                    c += "</div>";
+//                                    c += "<div class=\"time-chat\">";
+//                                    c += b[j].date_scape + "-" + b[j].time_scape;
+//                                    c += "</div>";
+//                                    c += "<div class=\"desc-chat\">";
+//                                    c += b[j].message;
+//                                    c += "</div>";
+//                                    c += "</div>";
+//                                    c += "</div>";
+//
+//                                    if (j == 0) {
+//                                        $('#chatbox_id').html(c);
+//                                    }
+//                                    else if (b.length != 0) {
+//                                        $('#chatbox_id').append(c);
+//                                    }
+//                                    else {
+//                                        $('#chatbox_id').append("");
+//                                    }
+//                                }
+//
+//                            }
+//                        });
+//                    });
+                }
+
+            }
+        });
+
+
+        function requestData() {
             $.ajax({
                 type: "POST",
                 url: "http://localhost/bizshout2/index.php/dashboard/get_viewer_dashboard_total",
@@ -83,6 +177,18 @@
                     }]
             });
         });
+
+        function get_id_last_comment() {
+            $.ajax({
+                type: "POST",
+                url: "http://localhost/bizshout2/index.php/dashboard/get_where_last_comment_id",
+                success: function(data) {
+                    var a = JSON.parse(data);
+                    alert(data);
+
+                }
+            });
+        }
 
     });
 </script>
@@ -159,22 +265,16 @@
             <div class="well-route">
                 <div class="itemin">
                     <h4>Latest Comments</h4>
-                    <div class="latest_comment">
-                        <div class="item click" data-toggle="modal" data-target="#myModal">
-                            <p><b>From: </b><a href="#"><b>John</b></a></p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim... <a href="#">Read more</a></p>
-                        </div>
-                        <div class="item click" data-toggle="modal" data-target="#myModal">
-                            <p><b>From: </b><a href="#"><b>John</b></a></p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim... <a href="#">Read more</a></p>
-                        </div>
+                    <div class="latest_comment" id="lastest_comments">
+
                     </div>
                 </div>
             </div>
-
         </div>
 
     </div>
+
+</div>
 </div> <!-- /container -->
 <div class="footer-sitemap">
     <div class="content">
@@ -223,36 +323,16 @@
     </div>
     <div class="modal-body">
         <div class="chatbox">
-            <div class="chatbox_scroll">
-                <div class="chat">
-                    <?php
-                    foreach ($message->result() as $row) {
-                        ?>
-                        <div class="image-chat">
-                            <img src="<?php echo base_url($row->photo) ?>"/>
-                        </div>
-                        <div class="info-chat">
-                            <div class="name-chat sender">
-                                <?php echo $row->firstname ?> <?php echo $row->lastname ?>
-                            </div>
-                            <div class="time-chat">
-                                <?php echo $row->date_scape ?> -  <?php echo $row->time_scape ?>
-                            </div>
-                            <div class="desc-chat">
-                                <?php echo $row->message ?>
-                            </div>
-                        </div>
-                        <?php
-                    }
-                    ?>
-                </div><!-- chat -->
+            <div class="chatbox_scroll" id="chatbox_id">
+                <!-- chat -->
             </div>
             <div class="chatbox-input">
-                <div class="textarea-input">
+                <form>
                     <textarea style="height: 30px;width: 350px;resize: none;"></textarea>
-                    <btn class="btn btn-info" style="line-height: 30px;margin-top: -10px;">Send</btn>
-                    <btn class="btn btn-primary" style="line-height: 30px;margin-top: -10px;">Connect</btn>
-                </div>
+                    <button class="btn btn-info" style="line-height: 30px;margin-top: -10px;">Send</button>
+                    <button class="btn btn-primary" style="line-height: 30px;margin-top: -10px;">Connect</button>
+                </form>
+
             </div>
         </div>
     </div>

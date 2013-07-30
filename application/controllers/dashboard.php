@@ -15,7 +15,6 @@ class Dashboard extends CI_Controller {
         $data['item'] = $this->session->userdata('email');
         $data['potential'] = $this->profile->get_potential_matches();
         $data['connect'] = $this->profile->get_your_connection();
-        $data['message'] = $this->profile->get_message_member();
         $data['data_member'] = $this->profile->get_id();
 
 
@@ -51,6 +50,25 @@ class Dashboard extends CI_Controller {
     
     function get_viewer_dashboard_total(){
         $q = $this->profile->get_viewer_dashboard_total();
+        echo $q;
+    }
+    
+    function get_where_last_comment(){
+        $q = $this->profile->get_where_last_comment_id();
+        echo $q;
+    }
+    
+     function get_message_chat() {
+        $where_id = $this->input->post('where_id');
+        $this->load->model('profile');
+        $q = $this->profile->get_message_member($where_id);
+        echo $q;
+    }
+    
+    function the_last(){
+        $last_id = $this->input->post('last_id');
+        $this->load->model('profile');
+        $q = $this->profile->the_last_comment($last_id);
         echo $q;
     }
 
